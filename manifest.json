@@ -1,6 +1,6 @@
 {
   "slug": "raven-hass-plugin",
-  "name": "HomeAssistant Integration",
+  "name": "HomeAssistant",
   "description": "Integration with a HomeAssistant instance",
   "icon": "home",
   "dependencies": ["git+https://github.com/raven-automation/raven-hass.git"]
