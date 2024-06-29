@@ -5,6 +5,8 @@
   "icon": "home",
   "dependencies": [
     {
+      "name": "raven-hass",
+      "source": "git",
       "ref": "git+https://github.com/raven-automation/raven-hass.git",
       "cache": false
     }
