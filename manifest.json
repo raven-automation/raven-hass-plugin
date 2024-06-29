@@ -3,5 +3,10 @@
   "name": "HomeAssistant",
   "description": "Integration with a HomeAssistant instance",
   "icon": "home",
-  "dependencies": ["git+https://github.com/raven-automation/raven-hass.git"]
+  "dependencies": [
+    {
+      "ref": "git+https://github.com/raven-automation/raven-hass.git",
+      "cache": false
+    }
+  ]
 }
