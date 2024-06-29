@@ -1,5 +1,5 @@
 {
   "slug": "raven-hass-plugin",
-  "name": "HomeAssistant",
+  "name": "HomeAssistant Integration",
   "dependencies": ["git+https://github.com/raven-automation/raven-hass.git"]
 }
