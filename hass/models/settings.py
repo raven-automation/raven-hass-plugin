@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from typing import TypedDict
 
 
-class HassSettings(BaseModel):
+class HassSettings(TypedDict):
     hass_instance: str
     hass_token: str

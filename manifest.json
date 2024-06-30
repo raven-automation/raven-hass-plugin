@@ -1,5 +1,5 @@
 {
-  "slug": "raven-hass-plugin",
+  "slug": "raven_hass_plugin",
   "name": "HomeAssistant",
   "description": "Integration with a HomeAssistant instance",
   "icon": "home",
@@ -11,10 +11,11 @@
       "cache": false
     }
   ],
-  "module": "hass",
+  "entrypoint": "hass/__init__.py",
   "exports": {
     "api_client": {
-      "import_path": "lifecycle",
+      "type": "lifecycle",
+      "import_path": null,
       "member": "hass_lifecycle",
       "context_key": "api_client",
       "is_async": true
