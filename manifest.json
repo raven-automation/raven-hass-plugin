@@ -10,5 +10,14 @@
       "ref": "git+https://github.com/raven-automation/raven-hass.git",
       "cache": false
     }
-  ]
+  ],
+  "module": "hass",
+  "exports": {
+    "api_client": {
+      "import_path": "lifecycle",
+      "member": "hass_lifecycle",
+      "context_key": "api_client",
+      "is_async": true
+    }
+  }
 }
