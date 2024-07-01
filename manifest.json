@@ -18,6 +18,15 @@
       "member": "hass_lifecycle",
       "context_key": "api_client",
       "is_async": true
+    },
+    "get_entities": {
+      "type": "resource",
+      "import_path": null,
+      "member": "get_entities",
+      "is_async": true,
+      "kwargs": {
+        "client": "api_client"
+      }
     }
   }
 }
