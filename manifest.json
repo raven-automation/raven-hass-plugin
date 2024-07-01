@@ -7,8 +7,7 @@
     {
       "name": "raven-hass",
       "source": "git",
-      "ref": "git+https://github.com/raven-automation/raven-hass.git",
-      "cache": false
+      "ref": "git+https://github.com/raven-automation/raven-hass.git"
     }
   ],
   "entrypoint": "hass/__init__.py",
