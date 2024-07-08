@@ -1,32 +1,32 @@
 {
-  "slug": "raven_hass_plugin",
-  "name": "HomeAssistant",
-  "description": "Integration with a HomeAssistant instance",
-  "icon": "home",
-  "dependencies": [
-    {
-      "name": "raven-hass",
-      "source": "git",
-      "ref": "git+https://github.com/raven-automation/raven-hass.git"
+    "slug": "raven_hass_plugin",
+    "name": "HomeAssistant",
+    "description": "Integration with a HomeAssistant instance",
+    "icon": "home-link",
+    "dependencies": [
+        {
+            "name": "raven-hass",
+            "source": "git",
+            "ref": "git+https://github.com/raven-automation/raven-hass.git"
+        }
+    ],
+    "entrypoint": "hass/__init__.py",
+    "exports": {
+        "api_client": {
+            "type": "lifecycle",
+            "import_path": null,
+            "member": "hass_lifecycle",
+            "context_key": "api_client",
+            "is_async": true
+        },
+        "get_entities": {
+            "type": "resource",
+            "import_path": null,
+            "member": "get_entities",
+            "is_async": true,
+            "kwargs": {
+                "client": "api_client"
+            }
+        }
     }
-  ],
-  "entrypoint": "hass/__init__.py",
-  "exports": {
-    "api_client": {
-      "type": "lifecycle",
-      "import_path": null,
-      "member": "hass_lifecycle",
-      "context_key": "api_client",
-      "is_async": true
-    },
-    "get_entities": {
-      "type": "resource",
-      "import_path": null,
-      "member": "get_entities",
-      "is_async": true,
-      "kwargs": {
-        "client": "api_client"
-      }
-    }
-  }
 }
