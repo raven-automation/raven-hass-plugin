@@ -1,7 +1,7 @@
 from datetime import date, datetime, time
 from enum import Enum
 from inspect import isclass
-from types import UnionType
+from types import NoneType, UnionType
 from typing import Any, Literal, Union, get_args, get_origin
 from pydantic import BaseModel
 from raven_hass import (
@@ -32,6 +32,10 @@ def parse_annotation(annotation: Any) -> ResourcePropertyType:
     elif origin is Literal:
         return ResourcePropertyType.OPTION
     elif origin is list or origin is tuple or annotation is list or annotation is tuple:
+        if any(
+            [not i in [str, bool, int, float, NoneType] for i in get_args(annotation)]
+        ):
+            return ResourcePropertyType.OBJECT
         return ResourcePropertyType.LIST
     elif origin is dict or annotation is dict:
         return ResourcePropertyType.OBJECT
