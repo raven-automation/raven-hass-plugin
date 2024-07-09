@@ -1,7 +1,9 @@
+from typing import Any
 from common.plugin import *
 from raven_hass import *
 
 from common.plugin.models.executor import *
+from common.plugin.models.executor import Executor
 from common.plugin.models.resource import Resource
 from iso3166 import countries
 from language_tags.tags import registry
@@ -217,3 +219,13 @@ class HassExecutor(ExecutionManager):
         services = await self._get_services()
         executors = [self.service_to_executor(svc) for svc in services]
         return [i for i in executors if i.matches_resources(*targets)]
+
+    async def execute(
+        self, executor: Executor, arguments: dict[str, Any], target: Resource
+    ) -> None:
+        entities = await self.client.get_entities()
+        for i in entities:
+            if i.entity_id == target.id:
+                await i.call_service(executor.id.split(":", maxsplit=1)[1], arguments)
+                break
+        return None
