@@ -27,6 +27,14 @@
             "kwargs": {
                 "client": "api_client"
             }
+        },
+        "get_executors": {
+            "type": "executor",
+            "import_path": null,
+            "member": "HassExecutor",
+            "kwargs": {
+                "client": "api_client"
+            }
         }
     }
 }
