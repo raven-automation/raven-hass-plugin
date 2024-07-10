@@ -35,6 +35,14 @@
             "kwargs": {
                 "client": "api_client"
             }
+        },
+        "state_change_listener": {
+            "type": "event",
+            "import_path": null,
+            "member": "handle_hass_events",
+            "kwargs": {
+                "client": "api_client"
+            }
         }
     }
 }
