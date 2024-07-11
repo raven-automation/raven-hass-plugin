@@ -14,9 +14,14 @@ async def hass_lifecycle(settings: HassSettings):
 
 
 async def handle_hass_events(
-    emit: Callable[[str, dict[str, Any]], None], client: RavenHassClient = None
+    emit: Callable[[str, dict[str, Any], list[str] | str], None],
+    client: RavenHassClient = None,
 ):
     async for ev in client.subscribe_events("state_changed"):
         event = ev.event["data"]
         if "entity_id" in event.keys():
-            emit("resource.update", {"entity_id": event["entity_id"]})
+            emit(
+                "resource.update",
+                {"entity_id": event["entity_id"]},
+                scopes=["resources.all.*", "resources.plugin.raven_hass_plugin.*"],
+            )
