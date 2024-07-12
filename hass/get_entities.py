@@ -16,6 +16,7 @@ from common.plugin import (
     ResourceProperty,
     ResourceMetadata,
     ResourcePropertyType,
+    ResourceResolver,
 )
 
 
@@ -257,13 +258,17 @@ def resolve_icon(entity: HAEntity) -> str:
             return "settings-2"
 
 
-async def get_entities(client: RavenHassClient = None, **kwargs):
-    entities = await client.get_entities()
-    resources: list[Resource] = []
-    for entity in entities:
-        props: dict = parse_entity_schema(entity)
-        resources.append(
-            Resource(
+class EntityResolver(ResourceResolver):
+
+    def __init__(self, client: RavenHassClient = None, **kwargs) -> NoneType:
+        super().__init__(**kwargs)
+        self.client = client
+
+    async def get_one(self, id: str) -> Resource | NoneType:
+        entity = await self.client.get_entity(id)
+        if entity:
+            props: dict = parse_entity_schema(entity)
+            return Resource(
                 id=entity.entity_id,
                 plugin="raven_hass_plugin",
                 metadata=ResourceMetadata(
@@ -275,5 +280,27 @@ async def get_entities(client: RavenHassClient = None, **kwargs):
                 properties=props,
                 state_key="state",
             )
-        )
-    return resources
+        return None
+
+    async def get_all(self):
+        entities = await self.client.get_entities()
+        resources: list[Resource] = []
+        for entity in entities:
+            props: dict = parse_entity_schema(entity)
+            resources.append(
+                Resource(
+                    id=entity.entity_id,
+                    plugin="raven_hass_plugin",
+                    metadata=ResourceMetadata(
+                        display_name=" ".join(
+                            [i.title() for i in entity.name.split("_")]
+                        ),
+                        category=entity.domain,
+                        tags=[entity.domain, "HomeAssistant"],
+                        icon=resolve_icon(entity),
+                    ),
+                    properties=props,
+                    state_key="state",
+                )
+            )
+        return resources

@@ -22,8 +22,7 @@
         "get_entities": {
             "type": "resource",
             "import_path": null,
-            "member": "get_entities",
-            "is_async": true,
+            "member": "EntityResolver",
             "kwargs": {
                 "client": "api_client"
             }
